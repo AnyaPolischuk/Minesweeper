@@ -58,4 +58,17 @@
   height: 18px;
   scale: 2;
   margin-right: 1px;
+  &:hover {
+    filter: contrast(1.6);
+  }
+}
+
+.game-cell__bomb {
+  background-image: url(https://davmedia.test.tech-mail.ru/editor_uploads/2023/02/07/minesweeper-sprites_9TPZzv3.png);
+  background-repeat: no-repeat;
+  background-position: right -50px;
+  width: 18px;
+  height: 18px;
+  scale: 2;
+  margin-right: 1px;
 }

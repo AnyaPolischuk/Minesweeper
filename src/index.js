@@ -1,9 +1,10 @@
 import './index.html';
 import './style.scss';
-import {createGameField} from './modules/test';
+import {createGameField, createMatrixOfGame} from './modules/test';
 
 
-createGameField();
+createGameField(16, 16);
+createMatrixOfGame(256, 40);
 
 
 
