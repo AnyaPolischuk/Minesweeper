@@ -11,6 +11,7 @@ export function createGameField(row, columns) {
 }
 
 export function createMatrixOfGame(amountOfCells, amountOfBombs) {
+  //const test = document.querySelectorAll('.game-cell');
   const arrayIndexesOfBombs =  [...new Array(amountOfBombs)].map(() => Math.round(Math.random() * amountOfCells));
 
    let arrayOfBombs = new Array(amountOfCells);
@@ -32,13 +33,18 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
  
 
   gameField.addEventListener('click', (event) => {
+    const index = +event.target.id;
+    const row = Math.trunc(index / 16);
+    const column = Math.trunc(index - row * 16);
     if (event.target.className === 'game-cell') {
-      if (arrayIndexesOfBombs.includes(+event.target.id)) {
+      if (arrayIndexesOfBombs.includes(index)) {
         event.target.classList.remove('game-cell');
         event.target.classList.add('game-cell__bomb');
         event.target.disabled = true;
       } else {
-
+        event.target.classList.remove('game-cell');
+        event.target.innerHTML = resultMatrixOfGame[row][column]
+        event.target.disabled = true;
       }
     } else return;
   })
