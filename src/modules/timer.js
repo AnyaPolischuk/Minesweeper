@@ -1,34 +1,79 @@
-// запускать при 1ом клике на поле
-
 export function createCounter(minutes) {
   let current = minutes;
-  const counter = document.querySelector('.timer__counter');
-  counter.innerHTML = current;
+  
+  const counterZeroNumber = document.querySelector('.timer__counter0');
+  const counterFirstNumber = document.querySelector('.timer__counter1');
+  const counterSecondNumber = document.querySelector('.timer__counter2');
+
+  counterZeroNumber.classList.add('number_0');
+  counterFirstNumber.classList.add('number_4');
+  counterSecondNumber.classList.add('number_0');
 
   const timerId = setInterval(function() {
-    console.log(current);
-    counter.innerHTML = current;
+ 
+    let currentTimeString = String(current);
+    let previousTimeString = String(current + 1);
+
+    if (currentTimeString.length === 1) {
+      counterFirstNumber.classList.remove(`number_${previousTimeString[0]}`);
+      counterSecondNumber.classList.remove(`number_${previousTimeString[0]}`);
+
+      counterFirstNumber.classList.add(`number_0`);
+      counterSecondNumber.classList.add(`number_${currentTimeString[0]}`);
+
+    } else {
+      counterFirstNumber.classList.remove(`number_${previousTimeString[0]}`);
+      counterSecondNumber.classList.remove(`number_${previousTimeString[1]}`);
+
+      counterFirstNumber.classList.add(`number_${currentTimeString[0]}`);
+      counterSecondNumber.classList.add(`number_${currentTimeString[1]}`);
+    }
+    
     if (current <= 0) {
       console.log('game over');
       clearInterval(timerId);
+      counterFirstNumber.classList.add(`number_0`)
+      counterSecondNumber.classList.add(`number_0`)
     }
     current--;
+    
   }, 60000);
 }
 
 export function createTimer() {
   let currentTime = 0;
-  const timer = document.querySelector('.timer__stopwatch');
-  timer.innerHTML = currentTime;
+  
+  const timerZeroNumber = document.querySelector('.timer__stopwatch0');
+  const timerFirstNumber = document.querySelector('.timer__stopwatch1');
+  const timerSecondNumber = document.querySelector('.timer__stopwatch2');
+
+  timerZeroNumber.classList.add('number_0');
+  timerFirstNumber.classList.add('number_0');
+  timerSecondNumber.classList.add('number_0');
   
   const timerId = setInterval(function() {
-    console.log(currentTime);
-    // counter.innerHTML = current
-    // if (current <= 0) {
-    //   console.log('game over')
-    //   clearInterval(timerId);
-    // }
-    timer.innerHTML = currentTime;
+    let currentTimeString = String(currentTime);
+    let previousTimeString = String(currentTime - 1);
+
+    if (currentTimeString.length === 1) {
+      timerSecondNumber.classList.remove(`number_${previousTimeString[0]}`);
+
+      timerSecondNumber.classList.add(`number_${currentTimeString[0]}`);
+    } else if (currentTimeString.length === 2) {
+      timerFirstNumber.classList.remove(`number_${previousTimeString[0]}`);
+      timerSecondNumber.classList.remove(`number_${previousTimeString[1]}`);
+
+      timerFirstNumber.classList.add(`number_${currentTimeString[0]}`);
+      timerSecondNumber.classList.add(`number_${currentTimeString[1]}`);
+    } else if (currentTimeString.length === 3) {
+      timerZeroNumber.classList.remove(`number_${previousTimeString[0]}`);
+      timerFirstNumber.classList.remove(`number_${previousTimeString[1]}`);
+      timerSecondNumber.classList.remove(`number_${previousTimeString[2]}`);
+
+      timerZeroNumber.classList.add(`number_${currentTimeString[0]}`);
+      timerFirstNumber.classList.add(`number_${currentTimeString[1]}`);
+      timerSecondNumber.classList.add(`number_${currentTimeString[2]}`);
+    }
     currentTime++;
   }, 1000);
 }
