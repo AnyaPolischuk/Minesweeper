@@ -112,6 +112,64 @@
   background-position: -51px -50px;
 }
 
+.timer_0,
+.timer_1,
+.timer_2,
+.timer_3,
+.timer_4,
+.timer_5,
+.timer_6,
+.timer_7,
+.timer_8,
+.timer_9 {
+  background-image: url('./img/minesweeper.png');
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 23px;
+  scale: 1.7;
+}
+
+.timer_0 {
+  background-position: -126px top;
+}
+
+.timer_1 {
+  background-position: left top;
+}
+
+.timer_2 {
+  background-position: -14px top;
+}
+
+.timer_3 {
+  background-position: -28px top;
+}
+
+.timer_4 {
+  background-position: -42px top;
+}
+
+.timer_5 {
+  background-position: -56px top;
+}
+
+.timer_6 {
+  background-position: -70px top;
+}
+
+.timer_7 {
+  background-position: -84px top;
+}
+
+.timer_8 {
+  background-position: -98px top;
+}
+
+.timer_9 {
+  background-position: -112px top;
+}
+
+
 .number_0,
 .number_1,
 .number_2,
@@ -124,47 +182,44 @@
 .number_9 {
   background-image: url('./img/minesweeper.png');
   background-repeat: no-repeat;
-  width: 14px;
-  height: 23px;
-  scale: 1.7;
+  width: 18px;
+  height: 18px;
+  scale: 2;
+  margin-right: 1px;
 }
 
 .number_0 {
-  background-position: -126px top;
+  background-position: -17px -50px;
 }
 
 .number_1 {
-  background-position: left top;
+  background-position: left -67px;
 }
 
 .number_2 {
-  background-position: -14px top;
+  background-position: -17px -67px;
 }
 
 .number_3 {
-  background-position: -28px top;
+  background-position: -34px -67px;
 }
 
 .number_4 {
-  background-position: -42px top;
+  background-position: -51px -67px;
 }
 
 .number_5 {
-  background-position: -56px top;
+  background-position: -68px -67px;
 }
 
 .number_6 {
-  background-position: -70px top;
+  background-position: -85px -67px;
 }
 
 .number_7 {
-  background-position: -84px top;
+  background-position: -102px -67px;
 }
 
 .number_8 {
-  background-position: -98px top;
-}
-
-.number_9 {
-  background-position: -112px top;
+  background-position: -119px -67px;
 }

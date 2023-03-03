@@ -48,37 +48,54 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
         openBombMap(event.target, arrayIndexesOfBombs);
       } else if (resultMatrixOfGame[row][column] !== 0) {
         event.target.classList.add('game-cell__number');
-        event.target.innerHTML = resultMatrixOfGame[row][column]
+        event.target.classList.add(`number_${resultMatrixOfGame[row][column]}`);
         event.target.style.pointerEvents = 'none';
       } else if (resultMatrixOfGame[row][column] == 0) {
-        event.target.classList.add('game-cell__zero');
-        console.log('its 0')
-        event.target.innerHTML = resultMatrixOfGame[row][column]
-        event.target.style.pointerEvents = 'none';
+         openFieldWithoutBombs(row, column, resultMatrixOfGame);
       }
     } else return;
   })
 }
 
+function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
+  const columns = 16;
+  let allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
+  const index = i * columns + j;
 
-// function open(i, j, resultMatrixOfGame) {
-//   const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
-//   const index = (i + 1) * (j + 1) - 1;
-//   if (i < 0 || i >= resultMatrixOfGame.length || j < 0 || j >= resultMatrixOfGame[i].length) return;
-  
-//   if (allCellsArray[index].classList.contains('game-cell__number') || 
-//   allCellsArray[index].classList.contains('game-cell__zero')) {
-//     console.log('already pressed')
-    
-//   }
-//   allCellsArray[index].innerHTML = resultMatrixOfGame[i][j]
-  //console.log('all cells', allCellsArray[index])
-  
-  // open(i + 1, j, resultMatrixOfGame);
-  // open(i - 1, j, resultMatrixOfGame);
-  // open(i, j + 1, resultMatrixOfGame);
-  // open(i, j - 1, resultMatrixOfGame);
-//}
+  if (i < 0 || i >= resultMatrixOfGame.length || j < 0 || j >= resultMatrixOfGame[i].length) return;
+
+  // заменить на регулярку от 0 до 9
+  if (allCellsArray[index].classList.contains('number_0') ||
+      allCellsArray[index].classList.contains('number_1') ||
+      allCellsArray[index].classList.contains('number_2') ||
+      allCellsArray[index].classList.contains('number_3') ||
+      allCellsArray[index].classList.contains('number_4') ||
+      allCellsArray[index].classList.contains('number_5') ||
+      allCellsArray[index].classList.contains('number_6') ||
+      allCellsArray[index].classList.contains('number_7') ||
+      allCellsArray[index].classList.contains('number_8') ||
+      allCellsArray[index].innerHTML) {
+    return;
+  } 
+
+  if (resultMatrixOfGame[i][j] === 0) {
+    allCellsArray[index].classList.add('number_0')
+  } else if (resultMatrixOfGame[i][j] !== 'x') {
+    allCellsArray[index].classList.add(`number_${resultMatrixOfGame[i][j]}`)
+    return;
+  }
+   
+  openFieldWithoutBombs(i + 1, j, resultMatrixOfGame);
+  openFieldWithoutBombs(i + 1, j + 1, resultMatrixOfGame);
+  openFieldWithoutBombs(i, j + 1, resultMatrixOfGame);
+  openFieldWithoutBombs(i - 1, j + 1, resultMatrixOfGame);
+  openFieldWithoutBombs(i - 1, j, resultMatrixOfGame);
+  openFieldWithoutBombs(i - 1, j - 1, resultMatrixOfGame);
+  openFieldWithoutBombs(i, j - 1, resultMatrixOfGame);
+  openFieldWithoutBombs(i + 1, j - 1, resultMatrixOfGame);
+}
+
+
  
 function openBombMap(bombCell, arrayOfBombs) {
   const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
@@ -86,13 +103,8 @@ function openBombMap(bombCell, arrayOfBombs) {
 
   bombCell.classList.add('game-cell__bomb_red');
 
-  // console.log('allCellsArray', allCellsArray);
-  // console.log('arrayOfBombs', arrayOfBombs);
+  arrayOfBombs.forEach(item => allCellsArray[item].classList.add('game-cell__bomb'));
 
-  arrayOfBombs.forEach(item => {
-    //console.log('allCellsArray[item]', allCellsArray[item]);
-    allCellsArray[item].classList.add('game-cell__bomb')
-  })
   gameField.style.pointerEvents = 'none';
 
   mousedownImg.classList.add('timer__restart_lost');
