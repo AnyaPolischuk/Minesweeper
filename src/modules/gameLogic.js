@@ -1,4 +1,5 @@
 const gameField = document.querySelector('.field');
+export let isLoss = false;
 
 export function createGameField(row, columns) {
 
@@ -45,6 +46,7 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
     
     if (event.target.className === 'game-cell') {
       if (arrayIndexesOfBombs.includes(index)) {
+        isLoss = true;
         openBombMap(event.target, arrayIndexesOfBombs);
       } else if (resultMatrixOfGame[row][column] !== 0) {
         event.target.classList.add('game-cell__number');
@@ -103,12 +105,31 @@ function openBombMap(bombCell, arrayOfBombs) {
 
   bombCell.classList.add('game-cell__bomb_red');
 
-  arrayOfBombs.forEach(item => allCellsArray[item].classList.add('game-cell__bomb'));
+  arrayOfBombs.forEach(item => {
+    // if (!allCellsArray[item].classList.contains('game-cell__flag')) {
+    //   allCellsArray[item].classList.remove('game-cell__flag');
+    // }
+    allCellsArray[item].classList.add('game-cell__bomb');
+
+    if (allCellsArray[item].classList.contains('game-cell__flag') && allCellsArray[item].classList.contains('game-cell__bomb')) {
+      allCellsArray[item].classList.remove('game-cell__bomb');
+    }
+  });
+
+  allCellsArray.forEach(item => {
+    if (item.classList.contains('game-cell__flag') && !(item.classList.contains('game-cell__bomb'))) {
+      item.classList.remove('game-cell__flag');
+      item.classList.add('game-cell__bomb_cross');
+      console.log('wrong bomb')
+    } else if (item.classList.contains('game-cell__flag') && item.classList.contains('game-cell__bomb')) {
+      item.classList.remove('game-cell__bomb');
+      console.log('right bomb')
+    }
+  })
 
   gameField.style.pointerEvents = 'none';
 
   mousedownImg.classList.add('timer__restart_lost');
-  gameField.disabled = true;
 }
 
 

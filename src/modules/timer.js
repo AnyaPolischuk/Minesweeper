@@ -1,44 +1,4 @@
-export function createCounter(minutes) {
-  let current = minutes;
-  
-  const counterZeroNumber = document.querySelector('.timer__counter0');
-  const counterFirstNumber = document.querySelector('.timer__counter1');
-  const counterSecondNumber = document.querySelector('.timer__counter2');
-
-  counterZeroNumber.classList.add('timer_0');
-  counterFirstNumber.classList.add('timer_4');
-  counterSecondNumber.classList.add('timer_0');
-
-  const timerId = setInterval(function() {
-    current--;
-    let currentTimeString = String(current);
-    let previousTimeString = String(current + 1);
-    
-    if (currentTimeString.length === 1) {
-      counterFirstNumber.classList.remove(`timer_${previousTimeString[0]}`);
-      counterSecondNumber.classList.remove(`timer_${previousTimeString[0]}`);
-
-      counterFirstNumber.classList.add(`timer_0`);
-      counterSecondNumber.classList.add(`timer_${currentTimeString[0]}`);
-
-    } else {
-      counterFirstNumber.classList.remove(`timer_${previousTimeString[0]}`);
-      counterSecondNumber.classList.remove(`timer_${previousTimeString[1]}`);
-
-      counterFirstNumber.classList.add(`timer_${currentTimeString[0]}`);
-      counterSecondNumber.classList.add(`timer_${currentTimeString[1]}`);
-    }
-    
-    if (current <= 0) {
-      alert('game over');
-      clearInterval(timerId);
-      counterFirstNumber.classList.add(`timer_0`)
-      counterSecondNumber.classList.add(`timer_0`)
-    }
-    
-    
-  }, 60000);
-}
+import { isLoss } from "./gameLogic";
 
 export function createTimer() {
   let currentTime = 0;
@@ -77,6 +37,10 @@ export function createTimer() {
       timerSecondNumber.classList.add(`timer_${currentTimeString[2]}`);
     }
     currentTime++;
+
+    if (isLoss) {
+      clearInterval(timerId);
+    }
   }, 1000);
 }
 

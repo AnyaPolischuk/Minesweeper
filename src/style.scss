@@ -32,7 +32,7 @@
   margin: 33px 36px;
 }
 
-.timer__counter,
+.bombs__counter,
 .timer__stopwatch {
   display: flex;
   width: 100px;
@@ -41,9 +41,9 @@
   margin-top: 5px;
 }
 
-.timer__counter0,
-.timer__counter1, 
-.timer__counter2,
+.bombs__counter0,
+.bombs__counter1, 
+.bombs__counter2,
 .timer__stopwatch0,
 .timer__stopwatch1,
 .timer__stopwatch2 {
@@ -51,7 +51,7 @@
    margin: 15px 10px 0 0;
 }
 
-.timer__counter0,
+.bombs__counter0,
 .timer__stopwatch0 {
   margin-left: 21px;
 }
@@ -101,7 +101,11 @@
 }
 
 .game-cell__bomb_red {
-  background-position: -103px -50px;
+  background-position: -102px -50px;
+}
+
+.game-cell__bomb_cross {
+  background-position: right -50px;
 }
 
 .game-cell__flag {
