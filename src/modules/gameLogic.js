@@ -1,5 +1,3 @@
-import {createCounter, createTimer} from './timer';
-
 const gameField = document.querySelector('.field');
 
 export function createGameField(row, columns) {
@@ -14,6 +12,7 @@ export function createGameField(row, columns) {
 
 export function createMatrixOfGame(amountOfCells, amountOfBombs) {
   const arrayIndexesOfBombs = [];
+  let arrayOfBombs = new Array(amountOfCells);
 
   while(arrayIndexesOfBombs.length < amountOfBombs) {
 
@@ -23,9 +22,6 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
       arrayIndexesOfBombs.push(indexOfBomb);
     } 
   }
-
-
-   let arrayOfBombs = new Array(amountOfCells);
 
    for (let i = 0; i < amountOfCells; i++) {
     arrayOfBombs[arrayIndexesOfBombs[i]] = 'x';
@@ -53,11 +49,12 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
       } else if (resultMatrixOfGame[row][column] !== 0) {
         event.target.classList.add('game-cell__number');
         event.target.innerHTML = resultMatrixOfGame[row][column]
-        event.target.disabled = true;
+        event.target.style.pointerEvents = 'none';
       } else if (resultMatrixOfGame[row][column] == 0) {
         event.target.classList.add('game-cell__zero');
         console.log('its 0')
         event.target.innerHTML = resultMatrixOfGame[row][column]
+        event.target.style.pointerEvents = 'none';
       }
     } else return;
   })
@@ -96,33 +93,17 @@ function openBombMap(bombCell, arrayOfBombs) {
     //console.log('allCellsArray[item]', allCellsArray[item]);
     allCellsArray[item].classList.add('game-cell__bomb')
   })
+  gameField.style.pointerEvents = 'none';
 
   mousedownImg.classList.add('timer__restart_lost');
   gameField.disabled = true;
 }
 
 
-// переделать нормально рестарт, чтобы не перезагружалось
-export function restartGame() {
-  const restartBtn = document.querySelector('.timer__restart ');
-  restartBtn.addEventListener('click', () => {
-    location.reload();
-  })
-
-}
 
 
-export function createEventsOnMousedown() {
-  gameField.addEventListener('mousedown', () => {
-    const mousedownImg = document.querySelector('.timer__restart ');
-    mousedownImg.classList.add('timer__restart_mousedown');
-  })
 
-  gameField.addEventListener('mouseup', () => {
-    const mousedownImg = document.querySelector('.timer__restart ');
-    mousedownImg.classList.remove('timer__restart_mousedown');
-  })
-}
+
 
 
 

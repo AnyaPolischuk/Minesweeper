@@ -1,6 +1,7 @@
 import './index.html';
 import './style.scss';
-import {createGameField, createMatrixOfGame, createEventsOnMousedown, restartGame} from './modules/test';
+import {createGameField, createMatrixOfGame} from './modules/gameLogic';
+import {createEventsOnMousedown, rightClickHandler, restartGame} from './modules/clickHandlers';
 import {createCounter, createTimer} from './modules/timer';
 
 
@@ -12,6 +13,8 @@ createTimer();
 
 createEventsOnMousedown();
 restartGame();
+
+rightClickHandler();
 
 
 

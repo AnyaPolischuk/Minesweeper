@@ -38,7 +38,6 @@
   width: 100px;
   height: 50px;
   background-color: black;
-  color: white; // убрать потом
   margin-top: 5px;
 }
 
@@ -58,7 +57,7 @@
 }
  
 .timer__restart {
-  background-image: url(https://davmedia.test.tech-mail.ru/editor_uploads/2023/02/07/minesweeper-sprites_9TPZzv3.png);
+  background-image: url('./img/minesweeper.png');
   background-repeat: no-repeat;
   background-position: left -25px;
   width: 25px;
@@ -76,7 +75,7 @@
 }
 
 .game-cell {
-  background-image: url(https://davmedia.test.tech-mail.ru/editor_uploads/2023/02/07/minesweeper-sprites_9TPZzv3.png);
+  background-image: url('./img/minesweeper.png');
   background-repeat: no-repeat;
   background-position: left -50px;
   width: 18px;
@@ -89,8 +88,10 @@
 }
 
 .game-cell__bomb,
-.game-cell__bomb_red {
-  background-image: url(https://davmedia.test.tech-mail.ru/editor_uploads/2023/02/07/minesweeper-sprites_9TPZzv3.png);
+.game-cell__bomb_red,
+.game-cell__flag,
+.game-cell__question {
+  background-image: url('./img/minesweeper.png');
   background-repeat: no-repeat;
   background-position: -85px -50px;
   width: 18px;
@@ -103,6 +104,14 @@
   background-position: -103px -50px;
 }
 
+.game-cell__flag {
+  background-position: -35px -50px;
+}
+
+.game-cell__question {
+  background-position: -51px -50px;
+}
+
 .number_0,
 .number_1,
 .number_2,
@@ -113,7 +122,7 @@
 .number_7,
 .number_8,
 .number_9 {
-  background-image: url(https://davmedia.test.tech-mail.ru/editor_uploads/2023/02/07/minesweeper-sprites_9TPZzv3.png);
+  background-image: url('./img/minesweeper.png');
   background-repeat: no-repeat;
   width: 14px;
   height: 23px;
