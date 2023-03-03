@@ -10,10 +10,10 @@ export function createCounter(minutes) {
   counterSecondNumber.classList.add('number_0');
 
   const timerId = setInterval(function() {
- 
+    current--;
     let currentTimeString = String(current);
     let previousTimeString = String(current + 1);
-
+    
     if (currentTimeString.length === 1) {
       counterFirstNumber.classList.remove(`number_${previousTimeString[0]}`);
       counterSecondNumber.classList.remove(`number_${previousTimeString[0]}`);
@@ -30,12 +30,12 @@ export function createCounter(minutes) {
     }
     
     if (current <= 0) {
-      console.log('game over');
+      alert('game over');
       clearInterval(timerId);
       counterFirstNumber.classList.add(`number_0`)
       counterSecondNumber.classList.add(`number_0`)
     }
-    current--;
+    
     
   }, 60000);
 }
@@ -62,6 +62,7 @@ export function createTimer() {
     } else if (currentTimeString.length === 2) {
       timerFirstNumber.classList.remove(`number_${previousTimeString[0]}`);
       timerSecondNumber.classList.remove(`number_${previousTimeString[1]}`);
+      timerSecondNumber.classList.remove('number_9');
 
       timerFirstNumber.classList.add(`number_${currentTimeString[0]}`);
       timerSecondNumber.classList.add(`number_${currentTimeString[1]}`);
@@ -69,6 +70,7 @@ export function createTimer() {
       timerZeroNumber.classList.remove(`number_${previousTimeString[0]}`);
       timerFirstNumber.classList.remove(`number_${previousTimeString[1]}`);
       timerSecondNumber.classList.remove(`number_${previousTimeString[2]}`);
+      timerSecondNumber.classList.remove('number_9');
 
       timerZeroNumber.classList.add(`number_${currentTimeString[0]}`);
       timerFirstNumber.classList.add(`number_${currentTimeString[1]}`);

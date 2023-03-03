@@ -1,3 +1,5 @@
+import {createCounter, createTimer} from './timer';
+
 const gameField = document.querySelector('.field');
 
 export function createGameField(row, columns) {
@@ -11,7 +13,7 @@ export function createGameField(row, columns) {
 }
 
 export function createMatrixOfGame(amountOfCells, amountOfBombs) {
-  const test = document.querySelectorAll('.game-cell');
+  //const test = document.querySelectorAll('.game-cell');
   const arrayIndexesOfBombs =  [...new Array(amountOfBombs)].map(() => Math.round(Math.random() * amountOfCells));
 
    let arrayOfBombs = new Array(amountOfCells);
@@ -30,6 +32,11 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
    const resultMatrixOfGame = countBombsInCells(convertedArrayToMatrix);
    
    console.log(resultMatrixOfGame);
+
+
+   // возможно можно вызывать из index.js
+   createEventsOnMousedown();
+   restartGame();
  
 
   gameField.addEventListener('click', (event) => {
@@ -39,11 +46,8 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
     
     if (event.target.className === 'game-cell') {
       if (arrayIndexesOfBombs.includes(index)) {
-        event.target.classList.remove('game-cell');
-        event.target.classList.add('game-cell__bomb');
-        event.target.disabled = true;
+        openBombMap(event.target, arrayIndexesOfBombs);
       } else if (resultMatrixOfGame[row][column] !== 0) {
-        event.target.classList.remove('game-cell');
         event.target.classList.add('game-cell__number');
         event.target.innerHTML = resultMatrixOfGame[row][column]
         event.target.disabled = true;
@@ -77,31 +81,39 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
   // open(i, j - 1, resultMatrixOfGame);
 //}
  
+function openBombMap(bombCell, arrayOfBombs) {
+  const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
+  const mousedownImg = document.querySelector('.timer__restart ');
 
-// function open(row, column, index, elem, arrayIndexesOfBombs, resultMatrixOfGame) {
-//   if (!(row >= 0 && row < 16 && column >= 0 && column < 16)) return;
-//   if (elem.disabled === true) return;
-//   elem.disabled = true;
-//   if (resultMatrixOfGame[row][column]) {
-//     if (arrayIndexesOfBombs.includes(index)) {
-//       elem.classList.remove('game-cell');
-//       elem.classList.add('game-cell__bomb');
-      
-//     } else if (resultMatrixOfGame[row][column] === 0) {
-//       console.log('its 0')
-//       elem.innerHTML = '0'
-//       for (let x = -1; x <= 1; x++) {
-//         for (let y = -1; y <= 1; y++) {
-//            open(row + y, column + x, index, elem, arrayIndexesOfBombs, resultMatrixOfGame);
-//         }
-//       }
-//     } else {
-//       elem.classList.remove('game-cell');
-//       elem.innerHTML = resultMatrixOfGame[row][column]
-//       //elem.disabled = true;
-//     }
-//   } else return;
-// }
+  bombCell.classList.add('game-cell__bomb_red');
+  arrayOfBombs.forEach(item => allCellsArray[item].classList.add('game-cell__bomb'))
+
+  mousedownImg.classList.add('timer__restart_lost');
+  gameField.disabled = true;
+}
+
+
+// переделать нормально рестарт, чтобы не перезагружалось
+function restartGame() {
+  const restartBtn = document.querySelector('.timer__restart ');
+  restartBtn.addEventListener('click', () => {
+    location.reload();
+  })
+
+}
+
+
+function createEventsOnMousedown() {
+  gameField.addEventListener('mousedown', () => {
+    const mousedownImg = document.querySelector('.timer__restart ');
+    mousedownImg.classList.add('timer__restart_mousedown');
+  })
+
+  gameField.addEventListener('mouseup', () => {
+    const mousedownImg = document.querySelector('.timer__restart ');
+    mousedownImg.classList.remove('timer__restart_mousedown');
+  })
+}
 
 function convertArrayToMatrix(array, elementsPerSubArray) {
   let matrix = [], i, k;
