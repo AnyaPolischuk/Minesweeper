@@ -13,8 +13,17 @@ export function createGameField(row, columns) {
 }
 
 export function createMatrixOfGame(amountOfCells, amountOfBombs) {
-  //const test = document.querySelectorAll('.game-cell');
-  const arrayIndexesOfBombs =  [...new Array(amountOfBombs)].map(() => Math.round(Math.random() * amountOfCells));
+  const arrayIndexesOfBombs = [];
+
+  while(arrayIndexesOfBombs.length < amountOfBombs) {
+
+    const indexOfBomb = Math.floor(Math.random() * (amountOfCells - 1)) + 1;
+
+    if (arrayIndexesOfBombs.indexOf(indexOfBomb) === -1) {
+      arrayIndexesOfBombs.push(indexOfBomb);
+    } 
+  }
+
 
    let arrayOfBombs = new Array(amountOfCells);
 
@@ -30,14 +39,8 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
 
    const convertedArrayToMatrix = convertArrayToMatrix(arrayOfBombs, 16);
    const resultMatrixOfGame = countBombsInCells(convertedArrayToMatrix);
-   
+
    console.log(resultMatrixOfGame);
-
-
-   // возможно можно вызывать из index.js
-   createEventsOnMousedown();
-   restartGame();
- 
 
   gameField.addEventListener('click', (event) => {
     const index = +event.target.id;
@@ -55,12 +58,11 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
         event.target.classList.add('game-cell__zero');
         console.log('its 0')
         event.target.innerHTML = resultMatrixOfGame[row][column]
-        //open(row, column, resultMatrixOfGame)
       }
     } else return;
   })
- 
 }
+
 
 // function open(i, j, resultMatrixOfGame) {
 //   const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
@@ -86,7 +88,14 @@ function openBombMap(bombCell, arrayOfBombs) {
   const mousedownImg = document.querySelector('.timer__restart ');
 
   bombCell.classList.add('game-cell__bomb_red');
-  arrayOfBombs.forEach(item => allCellsArray[item].classList.add('game-cell__bomb'))
+
+  // console.log('allCellsArray', allCellsArray);
+  // console.log('arrayOfBombs', arrayOfBombs);
+
+  arrayOfBombs.forEach(item => {
+    //console.log('allCellsArray[item]', allCellsArray[item]);
+    allCellsArray[item].classList.add('game-cell__bomb')
+  })
 
   mousedownImg.classList.add('timer__restart_lost');
   gameField.disabled = true;
@@ -94,7 +103,7 @@ function openBombMap(bombCell, arrayOfBombs) {
 
 
 // переделать нормально рестарт, чтобы не перезагружалось
-function restartGame() {
+export function restartGame() {
   const restartBtn = document.querySelector('.timer__restart ');
   restartBtn.addEventListener('click', () => {
     location.reload();
@@ -103,7 +112,7 @@ function restartGame() {
 }
 
 
-function createEventsOnMousedown() {
+export function createEventsOnMousedown() {
   gameField.addEventListener('mousedown', () => {
     const mousedownImg = document.querySelector('.timer__restart ');
     mousedownImg.classList.add('timer__restart_mousedown');
@@ -115,6 +124,16 @@ function createEventsOnMousedown() {
   })
 }
 
+
+
+
+
+
+
+
+
+
+//функции ниже можно перенести в отдельный файл
 function convertArrayToMatrix(array, elementsPerSubArray) {
   let matrix = [], i, k;
 
