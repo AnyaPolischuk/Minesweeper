@@ -1,5 +1,10 @@
+import { restartGame } from "./clickHandlers";
+
 const gameField = document.querySelector('.field');
+const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
 export let isLoss = false;
+export let isWin = false;
+let countClick = 0;
 
 export function createGameField(row, columns) {
 
@@ -34,8 +39,8 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
     }
    }
 
-   const convertedArrayToMatrix = convertArrayToMatrix(arrayOfBombs, 16);
-   const resultMatrixOfGame = countBombsInCells(convertedArrayToMatrix);
+   let convertedArrayToMatrix = convertArrayToMatrix(arrayOfBombs, 16);
+   let resultMatrixOfGame = countBombsInCells(convertedArrayToMatrix);
 
    console.log(resultMatrixOfGame);
 
@@ -45,23 +50,62 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
     const column = Math.trunc(index - row * 16);
     
     if (event.target.className === 'game-cell') {
+      ++countClick;
       if (arrayIndexesOfBombs.includes(index)) {
-        isLoss = true;
-        openBombMap(event.target, arrayIndexesOfBombs);
-      } else if (resultMatrixOfGame[row][column] !== 0) {
+        if (countClick === 1) {
+          const newArrayOfBombs = changeBombAfterFirstClick(arrayIndexesOfBombs, index, amountOfCells);  
+          convertedArrayToMatrix = convertArrayToMatrix(newArrayOfBombs, 16);
+          console.log('convertedArrayToMatrix', convertedArrayToMatrix)
+          resultMatrixOfGame = countBombsInCells(convertedArrayToMatrix); 
+        } else {
+          isLoss = true;
+          openBombMap(event.target, arrayIndexesOfBombs);
+        }
+        
+      }  if (resultMatrixOfGame[row][column] !== 0) {
         event.target.classList.add('game-cell__number');
         event.target.classList.add(`number_${resultMatrixOfGame[row][column]}`);
         event.target.style.pointerEvents = 'none';
       } else if (resultMatrixOfGame[row][column] == 0) {
          openFieldWithoutBombs(row, column, resultMatrixOfGame);
-      }
+      } 
+      // checkIsWin();
     } else return;
   })
 }
 
+// function checkIsWin() {
+//   console.log('arrayIndexesOfBombs', arrayIndexesOfBombs)
+// }
+
+function changeBombAfterFirstClick(indexesOfBombs, index, amountOfCells) {
+  const indexOfIndexBomb = indexesOfBombs.indexOf(index);
+  let arrayOfBombs = new Array(amountOfCells);
+  
+  let newBombIndex = Math.floor(Math.random() * 255);
+
+  while (indexesOfBombs.includes(newBombIndex)) {
+    newBombIndex = Math.floor(Math.random() * 255);
+  }
+
+  indexesOfBombs.splice(indexOfIndexBomb, 1);
+  indexesOfBombs.push(newBombIndex);
+
+  for (let i = 0; i < amountOfCells; i++) {
+    arrayOfBombs[indexesOfBombs[i]] = 'x';
+   }
+
+   for (let i = 0; i < amountOfCells; i++) {
+    if (!arrayOfBombs[i]) {
+      arrayOfBombs[i] = 0
+    }
+   }
+
+  return arrayOfBombs;
+}
+
 function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
   const columns = 16;
-  let allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
   const index = i * columns + j;
 
   if (i < 0 || i >= resultMatrixOfGame.length || j < 0 || j >= resultMatrixOfGame[i].length) return;
@@ -100,19 +144,15 @@ function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
 
  
 function openBombMap(bombCell, arrayOfBombs) {
-  const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
   const mousedownImg = document.querySelector('.timer__restart ');
 
   bombCell.classList.add('game-cell__bomb_red');
 
   arrayOfBombs.forEach(item => {
-    // if (!allCellsArray[item].classList.contains('game-cell__flag')) {
-    //   allCellsArray[item].classList.remove('game-cell__flag');
-    // }
     allCellsArray[item].classList.add('game-cell__bomb');
 
     if (allCellsArray[item].classList.contains('game-cell__flag') && allCellsArray[item].classList.contains('game-cell__bomb')) {
-      allCellsArray[item].classList.remove('game-cell__bomb');
+      allCellsArray[item].classList.add('game-cell__flag');
     }
   });
 
@@ -120,11 +160,7 @@ function openBombMap(bombCell, arrayOfBombs) {
     if (item.classList.contains('game-cell__flag') && !(item.classList.contains('game-cell__bomb'))) {
       item.classList.remove('game-cell__flag');
       item.classList.add('game-cell__bomb_cross');
-      console.log('wrong bomb')
-    } else if (item.classList.contains('game-cell__flag') && item.classList.contains('game-cell__bomb')) {
-      item.classList.remove('game-cell__bomb');
-      console.log('right bomb')
-    }
+    } 
   })
 
   gameField.style.pointerEvents = 'none';

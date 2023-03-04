@@ -1,7 +1,7 @@
 import './index.html';
 import './style.scss';
 import {createGameField, createMatrixOfGame} from './modules/gameLogic';
-import {createEventsOnMousedown, rightClickHandler, restartGame, countBombs} from './modules/clickHandlers';
+import {createEventsOnMousedown, rightClickHandler, restartGame, bombMinusCount} from './modules/clickHandlers';
 import {createTimer} from './modules/timer';
 
 
@@ -17,7 +17,7 @@ restartGame();
 rightClickHandler();
 
 
-countBombs(40);
+bombMinusCount(40);
 
 
 
