@@ -7,6 +7,7 @@ import {createTimer} from './modules/timer';
 
 
 createGameField(16, 16);
+
 createMatrixOfGame(256, 40);
 
 createTimer();

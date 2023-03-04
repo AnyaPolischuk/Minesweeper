@@ -1,7 +1,7 @@
 import { restartGame } from "./clickHandlers";
 
 const gameField = document.querySelector('.field');
-const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
+
 export let isLoss = false;
 export let isWin = false;
 let countClick = 0;
@@ -14,11 +14,13 @@ export function createGameField(row, columns) {
       gameCell.id = `${i}`;
       gameField.append(gameCell);
   }
+  console.log(document.querySelectorAll('.game-cell'))
 }
 
 export function createMatrixOfGame(amountOfCells, amountOfBombs) {
   const arrayIndexesOfBombs = [];
   let arrayOfBombs = new Array(amountOfCells);
+  const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
 
   while(arrayIndexesOfBombs.length < amountOfBombs) {
 
@@ -106,12 +108,15 @@ function changeBombAfterFirstClick(indexesOfBombs, index, amountOfCells) {
 
 function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
   const columns = 16;
+  const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
+  console.log('infinity')
   const index = i * columns + j;
 
   if (i < 0 || i >= resultMatrixOfGame.length || j < 0 || j >= resultMatrixOfGame[i].length) return;
 
   // заменить на регулярку от 0 до 9
-  if (allCellsArray[index].classList.contains('number_0') ||
+  if (
+      allCellsArray[index].classList.contains('number_0') ||
       allCellsArray[index].classList.contains('number_1') ||
       allCellsArray[index].classList.contains('number_2') ||
       allCellsArray[index].classList.contains('number_3') ||
@@ -129,7 +134,7 @@ function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
   } else if (resultMatrixOfGame[i][j] !== 'x') {
     allCellsArray[index].classList.add(`number_${resultMatrixOfGame[i][j]}`)
     return;
-  }
+  } else return;
    
   openFieldWithoutBombs(i + 1, j, resultMatrixOfGame);
   openFieldWithoutBombs(i + 1, j + 1, resultMatrixOfGame);
@@ -145,7 +150,7 @@ function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
  
 function openBombMap(bombCell, arrayOfBombs) {
   const mousedownImg = document.querySelector('.timer__restart ');
-
+  const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
   bombCell.classList.add('game-cell__bomb_red');
 
   arrayOfBombs.forEach(item => {
