@@ -5,19 +5,12 @@ import {createEventsOnMousedown, rightClickHandler, restartGame, bombMinusCount}
 import {createTimer} from './modules/timer';
 
 
-
 createGameField(16, 16);
-
 createMatrixOfGame(256, 40);
-
 createTimer();
-
 createEventsOnMousedown();
 restartGame();
-
 rightClickHandler();
-
-
 bombMinusCount(40);
 
 

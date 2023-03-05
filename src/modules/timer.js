@@ -17,7 +17,6 @@ export function createTimer() {
 
     if (currentTimeString.length === 1) {
       timerSecondNumber.classList.remove(`timer_${previousTimeString[0]}`);
-
       timerSecondNumber.classList.add(`timer_${currentTimeString[0]}`);
     } else if (currentTimeString.length === 2) {
       timerFirstNumber.classList.remove(`timer_${previousTimeString[0]}`);

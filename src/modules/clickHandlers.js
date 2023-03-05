@@ -1,5 +1,3 @@
-import { checkIsWin } from "./gameLogic";
-
 export let amountOfFlags = 0;
 
 const gameField = document.querySelector('.field');
@@ -21,7 +19,6 @@ export function createEventsOnMousedown() {
 
 export function rightClickHandler() {
   gameField.addEventListener('contextmenu', (event) => {
-
     const clickedElement = event.target;
     event.preventDefault();
     
@@ -41,7 +38,6 @@ export function rightClickHandler() {
 }
 
 export function bombMinusCount(bombs) {
-  
   let currentAmountOfBombs = String(bombs - amountOfFlags);
   let previousAmountOfBombs = String(bombs - amountOfFlags + 1);
 
