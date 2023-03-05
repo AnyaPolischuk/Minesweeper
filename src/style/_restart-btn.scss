@@ -1,0 +1,21 @@
+.timer-restart {
+  background-image: url('./img/minesweeper.png');
+  background-repeat: no-repeat;
+  background-position: left -25px;
+  width: 25px;
+  height: 25px;
+  scale: 1.7;
+  margin-top: 15px;
+}
+
+.timer-restart_mousedown {
+  background-position: -55px -25px;
+}
+
+.timer-restart_lost {
+  background-position: -109px -25px;
+}
+
+.timer-restart_win {
+  background-position: -82px -25px;
+}

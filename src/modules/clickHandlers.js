@@ -3,19 +3,19 @@ import { checkIsWin } from "./gameLogic";
 export let amountOfFlags = 0;
 
 const gameField = document.querySelector('.field');
-const bombsZeroNumber = document.querySelector('.bombs__counter0');
-const bombsFirstNumber = document.querySelector('.bombs__counter1');
-const bombsSecondNumber = document.querySelector('.bombs__counter2');
+const bombsZeroNumber = document.querySelector('.bombs-counter_0');
+const bombsFirstNumber = document.querySelector('.bombs-counter_1');
+const bombsSecondNumber = document.querySelector('.bombs-counter_2');
 
 export function createEventsOnMousedown() {
   gameField.addEventListener('mousedown', () => {
-    const mousedownImg = document.querySelector('.timer__restart ');
-    mousedownImg.classList.add('timer__restart_mousedown');
+    const mousedownImg = document.querySelector('.timer-restart ');
+    mousedownImg.classList.add('timer-restart_mousedown');
   })
 
   gameField.addEventListener('mouseup', () => {
-    const mousedownImg = document.querySelector('.timer__restart ');
-    mousedownImg.classList.remove('timer__restart_mousedown');
+    const mousedownImg = document.querySelector('.timer-restart ');
+    mousedownImg.classList.remove('timer-restart_mousedown');
   })
 }
 
@@ -87,7 +87,7 @@ function bombPlusCount(bombs) {
 }
 
 export function restartGame() {
-  const restartBtn = document.querySelector('.timer__restart ');
+  const restartBtn = document.querySelector('.timer-restart ');
   restartBtn.addEventListener('click', () => {
     location.reload();
   })

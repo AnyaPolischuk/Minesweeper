@@ -101,8 +101,8 @@ export function checkIsWin(allCellsArray, resultMatrixOfGame) {
 
   console.log('counter', counter)
   if (counter == 216) {
-    const winImg = document.querySelector('.timer__restart');
-    winImg.classList.add('timer__restart_win');
+    const winImg = document.querySelector('.timer-restart');
+    winImg.classList.add('timer-restart_win');
     isWin = true;
   }
 }
@@ -176,7 +176,7 @@ function openFieldWithoutBombs(i, j, resultMatrixOfGame) {
 
  
 function openBombMap(bombCell, arrayOfBombs) {
-  const mousedownImg = document.querySelector('.timer__restart ');
+  const mousedownImg = document.querySelector('.timer-restart ');
   const allCellsArray = Array.from(document.querySelectorAll('.game-cell'));
   bombCell.classList.add('game-cell__bomb_red');
 
@@ -197,7 +197,7 @@ function openBombMap(bombCell, arrayOfBombs) {
 
   gameField.style.pointerEvents = 'none';
 
-  mousedownImg.classList.add('timer__restart_lost');
+  mousedownImg.classList.add('timer-restart_lost');
 }
 
 

@@ -3,9 +3,9 @@ import { isLoss, isWin } from "./gameLogic";
 export function createTimer() {
   let currentTime = 0;
   
-  const timerZeroNumber = document.querySelector('.timer__stopwatch0');
-  const timerFirstNumber = document.querySelector('.timer__stopwatch1');
-  const timerSecondNumber = document.querySelector('.timer__stopwatch2');
+  const timerZeroNumber = document.querySelector('.timer-stopwatch_0');
+  const timerFirstNumber = document.querySelector('.timer-stopwatch_1');
+  const timerSecondNumber = document.querySelector('.timer-stopwatch_2');
 
   timerZeroNumber.classList.add('timer_0');
   timerFirstNumber.classList.add('timer_0');

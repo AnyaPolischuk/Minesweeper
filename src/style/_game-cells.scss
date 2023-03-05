@@ -1,0 +1,38 @@
+.game-cell {
+  background-image: url('./img/minesweeper.png');
+  background-repeat: no-repeat;
+  background-position: left -50px;
+  width: 18px;
+  height: 18px;
+  scale: 2;
+  margin-right: 1px;
+}
+
+.game-cell__bomb,
+.game-cell__bomb_red,
+.game-cell__flag,
+.game-cell__question {
+  background-image: url('./img/minesweeper.png');
+  background-repeat: no-repeat;
+  background-position: -85px -50px;
+  width: 18px;
+  height: 18px;
+  scale: 2;
+  margin-right: 1px;
+}
+
+.game-cell__bomb_red {
+  background-position: -102px -50px;
+}
+
+.game-cell__bomb_cross {
+  background-position: right -50px;
+}
+
+.game-cell__flag {
+  background-position: -35px -50px;
+}
+
+.game-cell__question {
+  background-position: -51px -50px;
+}
