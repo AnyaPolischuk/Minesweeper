@@ -1,4 +1,4 @@
-import { isLoss } from "./gameLogic";
+import { isLoss, isWin } from "./gameLogic";
 
 export function createTimer() {
   let currentTime = 0;
@@ -38,7 +38,7 @@ export function createTimer() {
     }
     currentTime++;
 
-    if (isLoss) {
+    if (isLoss || isWin) {
       clearInterval(timerId);
     }
   }, 1000);

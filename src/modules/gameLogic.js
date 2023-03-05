@@ -71,14 +71,41 @@ export function createMatrixOfGame(amountOfCells, amountOfBombs) {
       } else if (resultMatrixOfGame[row][column] == 0) {
          openFieldWithoutBombs(row, column, resultMatrixOfGame);
       } 
-      // checkIsWin();
+      checkIsWin(allCellsArray, resultMatrixOfGame)
+     
     } else return;
   })
 }
 
-// function checkIsWin() {
-//   console.log('arrayIndexesOfBombs', arrayIndexesOfBombs)
-// }
+export function checkIsWin(allCellsArray, resultMatrixOfGame) {
+  let counter = 0;
+  let index;
+  for (let i = 0; i < 16; i++) {
+    for (let j = 0;  j < 16; j++) {
+      if (resultMatrixOfGame[i][j] !== 'x') {
+         index = i * 16 + j;
+         if (allCellsArray[index].classList.contains('number_0') ||
+              allCellsArray[index].classList.contains('number_1') ||
+              allCellsArray[index].classList.contains('number_2') ||
+              allCellsArray[index].classList.contains('number_3') ||
+              allCellsArray[index].classList.contains('number_4') ||
+              allCellsArray[index].classList.contains('number_5') ||
+              allCellsArray[index].classList.contains('number_6') ||
+              allCellsArray[index].classList.contains('number_7') ||
+              allCellsArray[index].classList.contains('number_8')) {
+                counter++;
+              }
+      }
+    } 
+  }
+
+  console.log('counter', counter)
+  if (counter == 216) {
+    const winImg = document.querySelector('.timer__restart');
+    winImg.classList.add('timer__restart_win');
+    isWin = true;
+  }
+}
 
 function changeBombAfterFirstClick(indexesOfBombs, index, amountOfCells) {
   const indexOfIndexBomb = indexesOfBombs.indexOf(index);

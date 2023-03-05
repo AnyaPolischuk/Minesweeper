@@ -1,3 +1,5 @@
+import { checkIsWin } from "./gameLogic";
+
 export let amountOfFlags = 0;
 
 const gameField = document.querySelector('.field');
