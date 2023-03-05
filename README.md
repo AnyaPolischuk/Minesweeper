@@ -3,7 +3,7 @@
 ## Deploy
 [https://aquamarine-pie-91c639.netlify.app/](https://aquamarine-pie-91c639.netlify.app/)
 
-## Available Scripts
+## Getting started 
 
 In the project directory, you can run:
 
