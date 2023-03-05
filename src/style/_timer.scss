@@ -1,0 +1,80 @@
+.bombs-counter,
+.timer-stopwatch {
+  display: flex;
+  width: 100px;
+  height: 50px;
+  background-color: black;
+  margin-top: 5px;
+}
+
+.bombs-counter_0,
+.bombs-counter_1, 
+.bombs-counter_2,
+.timer-stopwatch_0,
+.timer-stopwatch_1,
+.timer-stopwatch_2 {
+   width: 40px;
+   margin: 15px 10px 0 0;
+}
+
+.bombs-counter_0,
+.timer-stopwatch_0 {
+  margin-left: 21px;
+}
+
+.timer_0,
+.timer_1,
+.timer_2,
+.timer_3,
+.timer_4,
+.timer_5,
+.timer_6,
+.timer_7,
+.timer_8,
+.timer_9 {
+  background-image: url('./img/minesweeper.png');
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 23px;
+  scale: 1.7;
+}
+
+.timer_0 {
+  background-position: -126px top;
+}
+
+.timer_1 {
+  background-position: left top;
+}
+
+.timer_2 {
+  background-position: -14px top;
+}
+
+.timer_3 {
+  background-position: -28px top;
+}
+
+.timer_4 {
+  background-position: -42px top;
+}
+
+.timer_5 {
+  background-position: -56px top;
+}
+
+.timer_6 {
+  background-position: -70px top;
+}
+
+.timer_7 {
+  background-position: -84px top;
+}
+
+.timer_8 {
+  background-position: -98px top;
+}
+
+.timer_9 {
+  background-position: -112px top;
+}

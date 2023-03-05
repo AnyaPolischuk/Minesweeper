@@ -1,0 +1,23 @@
+.footer {
+  padding-top: 150px;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__year {
+  color: #0c0c0c74;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.footer-github__link {
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+  &:hover {
+    font-weight: bold;
+  }
+}
